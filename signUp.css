@@ -1,0 +1,130 @@
+#video-background{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+  /* background: linear-gradient( 40deg,); */
+  
+   
+}
+/* 
+@media screen and (max-width:800px) {
+  div{
+      width: 85% !important
+  }
+} 
+label{
+  color:#40196D ;
+  margin-left: 5px;
+  font-weight: bold;
+} */
+
+/*  */
+
+body{
+  padding-top: 50px;
+  /* min-height: 100vh; */
+  width: 100%;
+  background-image: url(/assets/signup.jpg);
+  /* background-color: #ddd4e6 !important; */
+  background-repeat: no-repeat;
+  /* background-position:center; */
+  background-size: 100% 100%;
+  /* margin-top: 0px; */
+  /* padding: 0px; */
+ }
+
+  #boxOne{
+    width: 35%;
+    margin: auto;
+    /* min-height: 10%; */
+    /* border: thick dashed red; */
+    /* border: 5px solid black; */
+    border-radius: 5px;
+    border-left: 2px solid  #1D2335;
+    border-top: 2px solid  #1D2335;
+    /* padding: 5px; */
+    display: flex;
+    flex-direction: column;
+    /* background: linear-gradient(rgba(181, 175, 175, 0.9), rgba(0, 0, 255, 0.2), rgba(29, 19, 19, 0.2), #EDE9F3), url("./assets/b-to-b-transfer-pic.svg"); */
+    background: linear-gradient( rgba(170, 170, 182, 0.1), rgba(220, 229, 229, 0.1));
+    padding: 10px;
+    gap: 3px;
+    /* margin-top: 70px; */
+  }
+  
+  /* @media screen and (max-width:750px){
+    #boxOne{
+      width: 90% !important;
+      margin: auto;
+    }
+  } */
+  
+  #boxTwo{
+    border-radius: 5px;
+    border-left: 2px solid  #1D2335;
+    border-top: 2px solid  #1D2335;
+    padding: 15px;
+    display: none;
+    /* display: flex; */
+    width: 35%;
+    height: 83vh;
+    /* align-items: center; */
+    justify-content: center;
+    margin: 1% auto;
+    flex-direction: column;
+    gap: 20px;
+    /* display: block; */
+  }
+
+  @media screen and (max-width:800px) {
+    div{
+        width: 85% !important;
+        margin: auto;
+    }
+} 
+label{
+    color: black;
+    /* color: #0d62e2; */
+    margin-left: 5px;
+    font-weight: bold;
+}
+.password{
+  /* display: inline-block; */
+  position: relative;
+  border: 1px solid #000;
+}
+.password input{
+  padding: 10px 5px;
+  outline: none;
+  border: 0;
+}
+.pass-icon{
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 24px;
+  cursor: pointer;
+}
+
+.password-confirm{
+  /* display: inline-block; */
+  position: relative;
+  border: 1px solid #000;
+}
+.password-confirm input{
+  padding: 10px 5px;
+  outline: none;
+  border: 0;
+  /* width: 100%; */
+}
+.pass-icon-confirm{
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 24px;
+  cursor: pointer;
+}

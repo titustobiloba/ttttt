@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <input type="text" id="fName" placeholder="email">
+  
+  <input type="password" id="fPass" placeholder="For password">
+  <button onclick="submitLogin()">submit</button>
+<script>
+  usersArr = []
+  const submitLogin = () =>{
+    forName = fName.value;
+    forPass = fPass.value;
+    userObj = {forName, forPass};
+    usersArr.push(userObj);
+    setSignUpUserLocal = localStorage.setItem("UserAcct", JSON.stringify(usersArr));
+}
+</script>
+</body>
+</html>

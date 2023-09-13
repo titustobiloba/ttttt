@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard page</title>
+  <link rel="stylesheet" href="./bootstrap-5.1.3-dist/css/bootstrap.css" />
+  <!-- <link rel="stylesheet" href="css/bootstrap.css"> -->
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+<script 
+src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+</script>
+<!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous"> -->
+<body onload="getCurrentUserIdent()">
+  <header>
+    <h3 class="text-danger text-center">Welcome to titus bank app <span id="loginUserName"></span></h3>
+    <hr class="p-0 m-0">
+    <marquee class="m-0 p-0 text-danger fw-bold bg-primary " behavior="" direction="left">Enjoy Diverse Unlimited possibilities! Millions of uses with<strong>Swaga</strong> of Africa || Your swaga account is the key to opening up endless options. Make international payments, receive and send funds, pay for services, set up subscriptions or use auto-pay features</marquee>
+    <hr class="p-0 m-0">
+  </header>
+  <div id="forUserDetails" class="">
+    <span class="">
+      <button class="btn btn-primary btn-sm" id="forHidBtn" onclick="hidBal()">Hide balance</button>
+      <button class="btn btn-primary btn-sm" onclick="shoBal()" id="forShoBtn" style="display: none;">Show balance</button></span>
+      <div class="text-light ms-4 gap-0 lh-none">
+      <h2>Welcome, <p id="loginUsernames" class="d-inline fw-bold fs-4"></p></h2>
+      <p>Balance:<span id="balance"></span></p>
+      <p id="accountNo"></p>
+    </div>
+  </div>
+  <div id="grid-item-container" class="container-fluid">
+    <div class="grid-item" onclick="Airtime()" data-bs-toggle="modal" data-bs-target="#exampleModal1"><img src="./assets/icons/money-airtime.svg" alt="">
+    <h6>Purchase Airtime</h6></div>
+    <!-- <div class="grid-item" onclick="Airtime()" data-bs-toggle="modal" data-bs-target="#exampleModal1"><img src="./assets/icons/money-airtime.svg" alt="">
+    <h6>Purchase Airtime</h6></div> -->
+    <div class="grid-item" onclick="TransferFund()"><img src="./assets/icons/money-transfer.svg" alt="" style="width: 60%;"><h6>Transfer Fund</h6></div>
+    <div class="grid-item" onclick="withdralFund()"><img src="./assets/icons/money-withdraw.svg" alt="eithdraw-icon">
+    <h6>Withdrawal</h6></div>
+    <div class="grid-item" onclick="addFund()"><img src="./assets/icons/money-deposit.svg" alt=""><h6>Add Fund</h6></div>
+    <div class="grid-item" onclick="payBills()"><img src="./assets/icons/money-payment.svg" alt=""><h6>Pay Bills</h6></div>
+    <div class="grid-item" onclick="checkHistory()"><img src="./assets/icons/money-history.svg" alt="History" ><h6>Check History</h6></div>
+    <div class="grid-item" onclick="cardPage()"><img src="./assets/icons/money-cards.svg" alt="Card" style="width: 60%;"><h6>Cards</h6></div>
+    <div  onclick="others()" class="grid-item"><img src="./assets/icons/money-others.svg" alt="Others"><h6>Others</h6></div>
+    <div class="grid-item">
+      <h6>TRANSACTION CHART</h6>
+      <canvas id="myChart" style="width:100%; height: 85%;"></canvas>
+    </div>
+  </div>
+  <div class="text-center my-2">
+    <a href="./index.html" class="btn btn-primary">Home</a>
+    <a href="" class="btn btn-warning" onclick="logOut()">Log Out</a>
+  </div>
+    <script>
+      const hidBal = () =>{
+        balance.style.display = "none"
+        forShoBtn.style.display = "inline" 
+        forHidBtn.style.display = "none" 
+      }
+      const shoBal = () =>{
+        balance.style.display = "inline"
+        forShoBtn.style.display = "none" 
+        forHidBtn.style.display = "inline" 
+      }
+      const getCurrentUserIdent = () =>{
+        let currentLogin = localStorage.getItem("currentLogin") 
+        let allUsers = JSON.parse(localStorage.getItem("bankUsers"))
+        if(currentLogin){
+          // currentLogin = document.getElementById("loginUsernameAcctNo")
+            for(let i = 0; i < allUsers.length; i++){
+              if (allUsers[i].signUpEmail === currentLogin){
+                document.getElementById("loginUsernames").innerText = `${allUsers[i].signUpFirstname} ${allUsers[i].signUpLastname}`
+                document.getElementById("balance").innerText = ` $${allUsers[i].accountBalance}`
+                document.getElementById("accountNo").innerHTML = `<p>Account No: ${allUsers[i].forAcctNo}</p>`
+              }                 
+
+            }
+          }else{
+            // this person has not signIn
+           window.open("index.html", "_self")
+          }
+      }
+    function Airtime(){
+      window.location.href = "./making-transaction/airtime-purchase.html"
+    }
+    const withdralFund = () =>{
+      window.open("./making-transaction/withdrawal.html", "_self")
+    }
+    
+    const TransferFund = () =>{
+      window.open("./making-transaction/transfer-page.html", "_self")
+    }
+    const addFund = () =>{
+      window.open("./making-transaction/add-fund.html", "_self")
+    }
+    const payBills = () =>{
+      window.open("./making-transaction/pay-bills.html", "_self")
+      
+    }
+    const checkHistory = () =>{
+      window.open("./making-transaction/transaction-His.html", "_self")
+    }
+    const cardPage = () =>{
+      window.location.href = "./making-transaction/cards-page.html"
+    }
+    const logOut = () =>{
+      localStorage.removeItem("currentLogin")
+      window.open("index.html", "_self")
+    }
+   
+   var allUsers = JSON.parse(localStorage.getItem("bankUsers"))
+   const others = () =>{
+     // window.open("./making-transaction/withdrawal.html", "_self")
+     alert("Not available yet")
+   }
+   var currentLogin = (localStorage.getItem("currentLogin"))
+   let currentUserIndex = allUsers.findIndex(u => u.signUpEmail == currentLogin)
+   let currentTransAmmt = allUsers[currentUserIndex].transaction
+   let allTransAmmt = currentTransAmmt.filter(u=>u.discript.includes("Fund Transfer to"))
+   var sendAmtArray = []
+   var sumAmmtArr
+  //  var ammtTrsf = currentTransAmmt.filter(u => u.amtFund == "amtFund")
+  allTransAmmt.map((item, index)=>{
+    let trasf = parseInt(item.amtFund)
+    sendAmtArray.push(trasf)
+    sumAmmtArr = sendAmtArray.reduce((add, newTrans) => add + newTrans, 0)
+  })
+
+  let withdAmtArray = currentTransAmmt.filter(u=>u.discript == "Cash Withdraw")
+  //  console.log(allWithdAmmt)
+   var newWithdAmtArray = []
+   var sumAmmtWithd
+  //  var ammtTrsf = currentTransAmmt.filter(u => u.amtFund == "amtFund")
+  withdAmtArray.map((item, index)=>{
+    let withd = parseInt(item.amtFund)
+    newWithdAmtArray.push(withd)
+    sumAmmtWithd = sendAmtArray.reduce((add, newTrans) => add + newTrans, 0)
+  })
+
+  let credAmtArray = currentTransAmmt.filter(u=>u.discript == "Cash Deposit")
+  //  console.log(allWithdAmmt)
+   var newCashAmtArray = []
+   var sumAmmtCred
+  //  var ammtTrsf = currentTransAmmt.filter(u => u.amtFund == "amtFund")
+  credAmtArray.map((item, index)=>{
+    let credit = parseInt(item.amtFund)
+    newCashAmtArray.push(credit)
+    sumAmmtCred = newCashAmtArray.reduce((add, newTrans) => add + newTrans, 0)
+  })
+
+  let selfairAmtArray = currentTransAmmt.filter(u=>u.discript.includes("Airtime Purchase"))
+  //  console.log(allWithdAmmt)
+   var newselfairAmtArray = []
+   var sumAmmtselfair
+  //  var ammtTrsf = currentTransAmmt.filter(u => u.amtFund == "amtFund")
+  selfairAmtArray.map((item, index)=>{
+    let selfair = parseInt(item.amtFund)
+    newselfairAmtArray.push(selfair)
+    sumAmmtselfair = newselfairAmtArray.reduce((add, newTrans) => add + newTrans, 0)
+  })
+
+  let otherairAmtArray = currentTransAmmt.filter(u=>u.discript.includes("You sent airtime to"))
+  //  console.log(allWithdAmmt)
+   var newOtherairAmtArray = []
+   var sumAmmtOtherair
+  //  var ammtTrsf = currentTransAmmt.filter(u => u.amtFund == "amtFund")
+  otherairAmtArray.map((item, index)=>{
+    let otherair = parseInt(item.amtFund)
+    newOtherairAmtArray.push(otherair)
+    sumAmmtOtherair = newOtherairAmtArray.reduce((add, newTrans) => add + newTrans, 0)
+  })
+
+  const updateLocal = () => {
+    // allUsers[currentUserIndex].transaction.length = 0
+    localStorage.setItem("bankUsers", JSON.stringify(allUsers))
+    
+  }
+  updateLocal()
+
+    // for the transaction chart
+
+    const xValues = ["Transfer", "Withdrawal", "Credit", "Airtime self", "Airtime other"];
+const yValues = [sumAmmtArr, sumAmmtWithd, sumAmmtCred, sumAmmtselfair, sumAmmtOtherair];
+const barColors = ["red", "green","blue","orange","brown"];
+
+new Chart("myChart", {
+  type: "bar",
+  data: {
+    labels: xValues,
+    datasets: [{
+      backgroundColor: barColors,
+      data: yValues
+    }]
+  },
+  options: {
+    legend: {display: false},
+    title: {
+      display: true,
+      text: "swaga Transcation information details"
+    }
+  }
+});
+
+    </script>
+
+<script src="./bootstrap-5.1.3-dist/js/bootstrap.js"></script>
+</body>
+</html>
